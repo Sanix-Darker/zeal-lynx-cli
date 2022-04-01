@@ -63,6 +63,7 @@ docset_configuration['qt6'] = {
 
 parser = argparse.ArgumentParser(description='Zeal+Lynx.')
 parser.add_argument('--zeal-prefix', help='Where are Zeal\'s files located?', nargs='?')
+parser.add_argument('--lynx-dump', help='when "=true" -- dump rendered HTML to stdout instead of running Lynx proper', nargs='?')
 parser.add_argument('docset', help='Which documentation set to use')
 parser.add_argument('docpage', help='Which page to load', nargs='?')
 args = parser.parse_args()
@@ -130,7 +131,10 @@ else:
         except:
             pass
 
-        lynx_process = Popen(['lynx', '-stdin'], stdin=PIPE)
+        if args.lynx_dump == "true":
+            lynx_process = Popen(['lynx', '-stdin', '-dump'], stdin=PIPE)
+        else:
+            lynx_process = Popen(['lynx', '-stdin'], stdin=PIPE)
 
         stdout_data = lynx_process.communicate(input=str(content).encode('utf-8'))
 

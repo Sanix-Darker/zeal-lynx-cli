@@ -22,6 +22,16 @@ To show a particular page in a docset:
 
 See the documentation in the `zeal-cli` file for more.
 
+# Usage with FZF from the shell
+
+If you want to fuzzy search for documentation from shell,
+you can use FZF (https://github.com/junegunn/fzf/) with zeal-cli
+in a manner similar to this (though you should probably write a
+proper function that handles cancelling FZF):
+
+    zeal-cli cpp | fzf --height=50% --preview='zeal-cli --lynx-dump=true cpp {}' | xargs -d '\n' zeal-cli cpp
+
+
 # Installation
 
 Copy `zeal-cli` somewhere in your `$PATH` and `chmod +x` it.
