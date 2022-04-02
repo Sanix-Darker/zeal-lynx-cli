@@ -129,11 +129,12 @@ else:
         html = BeautifulSoup(file, "html.parser")
 
         content = html
-        for to_remove in current_docset_configuration["to_remove"]:
-            try:
-                find_node(html, to_remove).extract()
-            except:
-                pass
+        if "to_remove" in current_docset_configuration:
+            for to_remove in current_docset_configuration["to_remove"]:
+                try:
+                    find_node(html, to_remove).extract()
+                except:
+                    pass
 
         try:
             content = find_node(html, current_docset_configuration["to_show"])
