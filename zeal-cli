@@ -62,6 +62,11 @@ docset_configuration['cmake'] = {
     "to_remove" : [ "p#contents", "div.related", "div#contents" ],
     "to_show" : "div.document"
     }
+docset_configuration['boost'] = {
+    "zeal_name" : "Boost",
+    "to_remove" : [ "div.toc", "div.titlepage" ],
+    "to_show" : "div.chapter"
+    }
 
 
 # Start the code
