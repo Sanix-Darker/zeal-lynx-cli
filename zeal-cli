@@ -57,6 +57,11 @@ docset_configuration['qt6'] = {
     "zeal_name" : "Qt_6",
     "to_show" : "div.context"
     }
+docset_configuration['cmake'] = {
+    "zeal_name" : "CMake",
+    "to_remove" : [ "p#contents", "div.related", "div#contents" ],
+    "to_show" : "div.document"
+    }
 
 
 # Start the code
@@ -94,12 +99,16 @@ def find_node(html, node_definition):
     if class_sep_position > -1:
         tag = node_definition[:class_sep_position]
         class_name = node_definition[class_sep_position + 1:]
+        print(tag)
+        print("class: ", class_name)
         return html.find(tag, { "class" : class_name })
 
     else:
         id_sep_position = node_definition.find('#')
         tag = node_definition[:id_sep_position]
         id_name = node_definition[id_sep_position + 1:]
+        print(tag)
+        print("id: ", id_name)
         return html.find(tag, { "id" : id_name })
 
 if args.docpage is None:
@@ -120,11 +129,11 @@ else:
         html = BeautifulSoup(file, "html.parser")
 
         content = html
-        try:
-            for to_remove in current_docset_configuration["to_remove"]:
+        for to_remove in current_docset_configuration["to_remove"]:
+            try:
                 find_node(html, to_remove).extract()
-        except:
-            pass
+            except:
+                pass
 
         try:
             content = find_node(html, current_docset_configuration["to_show"])
