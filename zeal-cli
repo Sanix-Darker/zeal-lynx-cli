@@ -46,7 +46,7 @@ from subprocess import Popen, PIPE, STDOUT
 docset_configuration = {}
 docset_configuration['cpp'] = {
     "zeal_name" : "C++",
-    "to_remove" : [ "div.t-navbar", "table.toc" ],
+    "to_remove" : [ "span.editsection", "div.t-navbar", "table.toc" ],
     "to_show" : "div#bodyContent"
     }
 docset_configuration['qt5'] = {
