@@ -46,7 +46,7 @@ from subprocess import Popen, PIPE, STDOUT
 docset_configuration = {}
 docset_configuration['cpp'] = {
     "zeal_name" : "C++",
-    "to_remove" : [ "div.t-navbar", "table.toc" ],
+    "to_remove" : [ "span.editsection", "div.t-navbar", "table.toc" ],
     "to_show" : "div#bodyContent"
     }
 docset_configuration['qt5'] = {
@@ -106,7 +106,7 @@ def find_node(html, node_definition):
         class_name = node_definition[class_sep_position + 1:]
         print(tag)
         print("class: ", class_name)
-        return html.find(tag, { "class" : class_name })
+        return html.find_all(tag, { "class" : class_name })
 
     else:
         id_sep_position = node_definition.find('#')
@@ -114,7 +114,7 @@ def find_node(html, node_definition):
         id_name = node_definition[id_sep_position + 1:]
         print(tag)
         print("id: ", id_name)
-        return html.find(tag, { "id" : id_name })
+        return html.find_all(tag, { "id" : id_name })
 
 if args.docpage is None:
     # No page was specified, we should list all the available pages
@@ -137,12 +137,13 @@ else:
         if "to_remove" in current_docset_configuration:
             for to_remove in current_docset_configuration["to_remove"]:
                 try:
-                    find_node(html, to_remove).extract()
+                    for node in find_node(html, to_remove):
+                        node.extract()
                 except:
                     pass
 
         try:
-            content = find_node(html, current_docset_configuration["to_show"])
+            content = find_node(html, current_docset_configuration["to_show"])[0]
         except:
             pass
 
