@@ -1,4 +1,3 @@
-
 # About
 
 A small script to show Zeal (https://zealdocs.org/) pages
@@ -6,19 +5,17 @@ in terminal -- in the Lynx web browser.
 
 # Requirements
 
-- python3 with argparse, zdg, sqlite3, pathlib and BeautifulSoup (bs4)
+- python3 with argparse, xdg==5.1.1, sqlite3, pathlib and BeautifulSoup (bs4)
 - Zeal (install the desired documentation sets from its GUI)
 - Lynx web browser
 
 # Usage
 
-To show a list of all available pages in a docset:
-
-    zeal-cli DOCSET_NAME
-
-To show a particular page in a docset:
-
-    zeal-cli DOCSET_NAME PAGE
+- Make it executable `chmod +x ./zeal-cli`
+- Copy the script to the /usr/local/bin/
+- Maybe add an alias as `alias zeal-cli="python3.10 zeal-cli"` if you want it to be run by a specific version of python
+- To show a list of all available pages in a docset: `zeal-cli DOCSET_NAME`
+- To show a particular page in a docset: `zeal-cli DOCSET_NAME PAGE`
 
 See the documentation in the `zeal-cli` file for more.
 
